@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI based Network Security System Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>AI Based Network Security System</h1>
+    <div id="traffic-chart" class="chart"></div>
+    <div id="anomaly-chart" class="chart"></div>
+
+    <!-- Store traffic data in a script tag -->
+    <script id="traffic-data" type="application/json">
+        {{ traffic_data | tojson }}
+    </script>
+
+    <script>
+        var trafficData = JSON.parse(document.getElementById('traffic-data').textContent);
+        var times = trafficData.map(d => d.Time);
+        var lengths = trafficData.map(d => d.Length);
+        var anomalies = trafficData.filter(d => d.anomaly == -1);
+        var anomalyTimes = anomalies.map(d => d.Time);
+        var anomalyLengths = anomalies.map(d => d.Length);
+
+        // Traffic Chart
+        var trafficTrace = {
+            x: times,
+            y: lengths,
+            type: 'scatter',
+            name: 'Packet Length',
+            line: { color: '#1f77b4' }
+        };
+        Plotly.newPlot('traffic-chart', [trafficTrace], {
+            title: 'Network Traffic Over Time',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Packet Length (bytes)' }
+        });
+
+        // Anomaly Chart
+        var anomalyTrace = {
+            x: anomalyTimes,
+            y: anomalyLengths,
+            type: 'scatter',
+            mode: 'markers',
+            marker: { color: 'red', size: 12 },
+            name: 'Anomalies'
+        };
+        Plotly.newPlot('anomaly-chart', [anomalyTrace], {
+            title: 'Detected Anomalies',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Packet Length (bytes)' }
+        });
+    </script>
+</body>
+</html>
