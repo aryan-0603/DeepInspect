@@ -1,6 +1,5 @@
 /* General Page Styling */
 html, body {
-    font-family: 'Arial', sans-serif;
     background: linear-gradient(to right, #d7e1ec, #f5e6e8);
     color: #333;
     margin: 0;
@@ -19,21 +18,21 @@ h1 {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Chart Container - Side-by-Side Layout */
+/* Chart Container */
 .chart-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 97%;
-    max-width: 1700px; /* 🔥 Increased width to fit 1.7x wider charts */
+    max-width: 1700px;
     height: 75vh;
     gap: 30px;
 }
 
-/* Individual Chart Styling - 1.7x Wider & Larger Text */
+/* Individual Chart Styling */
 .chart {
     flex: 1;
-    max-width: 1000px; /* 🔥 Increased width (1.7x bigger) */
+    max-width: 1000px;
     height: 100%;
     background: rgba(255, 255, 255, 0.95);
     padding: 20px;
@@ -41,15 +40,15 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Larger Text Inside Charts */
+/* Chart Text Styling */
 .chart-title {
-    font-size: 22px; /* 🔥 Increased title text size */
+    font-size: 22px;
     font-weight: bold;
     color: #333;
 }
 
 .chart-label {
-    font-size: 18px; /* 🔥 Increased label text size */
+    font-size: 18px;
     color: #555;
 }
 
